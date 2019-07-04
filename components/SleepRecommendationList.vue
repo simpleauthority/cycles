@@ -1,0 +1,57 @@
+<template>
+  <b-row class="list">
+    <b-col v-for="option in options" :key="option.cycles">
+      <p :class="'suggestion ' + option.clazz">
+        {{ option.time | moment('h:mm A') }} for {{ option.cycles }} sleep
+        {{ pluralizeCycles(option.cycles) }}
+      </p>
+    </b-col>
+  </b-row>
+</template>
+
+<script>
+export default {
+  name: 'SleepRecommendationList',
+  props: {
+    options: {
+      type: Array,
+      required: true,
+      default: function () {
+        return []
+      }
+    }
+  },
+  methods: {
+    pluralizeCycles(cycles) {
+      if (cycles === 1) return 'cycle'
+      else return 'cycles'
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.list {
+  margin: 45px 0 25px 0;
+
+  .suggestion {
+    border-radius: 50rem;
+    background: $secondary;
+    padding: 15px;
+    color: $background !important;
+    border: 2px solid $background;
+
+    &.good {
+      border-color: #30b881;
+    }
+
+    &.ok {
+      border-color: #cfa440;
+    }
+
+    &.bad {
+      border-color: #c95034;
+    }
+  }
+}
+</style>
