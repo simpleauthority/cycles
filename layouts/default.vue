@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="lg" type="dark" variant="dark">
+    <b-navbar type="dark" variant="dark">
       <b-navbar-brand>Cycles</b-navbar-brand>
     </b-navbar>
     <b-container>
@@ -17,10 +17,11 @@ export default {}
 </script>
 
 <style lang="scss">
-#app {
+body {
   background-color: $background;
-  min-height: 100vh;
+}
 
+#app {
   h1,
   h2,
   h3,

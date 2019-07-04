@@ -140,10 +140,7 @@ export default {
 
 <style lang="scss">
 .app-jumbo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: 30px 0;
 
   hr {
     background-color: $tertiary;
