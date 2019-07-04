@@ -25,6 +25,14 @@ export default {
    */
   css: [],
   /*
+   ** Global Style Resources
+   */
+  styleResources: {
+    scss: [
+      '~assets/style/colors.scss'
+    ]
+  },
+  /*
    ** Plugins to load before mounting the App
    */
   plugins: [],
@@ -37,7 +45,8 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/style-resources'
   ],
   /*
    ** Axios module configuration
@@ -45,12 +54,30 @@ export default {
    */
   axios: {},
   /*
+   ** Router settings
+   */
+  router: {
+    base: '/cycles/'
+  },
+  /*
    ** Build configuration
    */
   build: {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {
+      if (ctx.isDev && ctx.isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/,
+          options: {
+            fix: true
+          }
+        })
+      }
+    }
   }
 }
