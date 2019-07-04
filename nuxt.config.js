@@ -36,7 +36,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    '~/plugins/vue-moment'
+    { src: '~/plugins/vue-luxon', ssr: false }
   ],
   /*
    ** Nuxt.js modules

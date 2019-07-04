@@ -8,7 +8,6 @@
         <nuxt />
       </main>
     </b-container>
-    </b-navbar>
   </div>
 </template>
 

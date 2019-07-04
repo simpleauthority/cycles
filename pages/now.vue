@@ -12,19 +12,33 @@
 <script>
 import SleepRecommendationList from '~/components/SleepRecommendationList'
 import ReminderAndBack from '~/components/ReminderAndBack'
-import genOption from '~/utils/generate-sleep-option'
+import CycleClassMixin from '~/mixin/cycle-class-mixin'
 
 export default {
   components: { SleepRecommendationList, ReminderAndBack },
+  mixins: [CycleClassMixin],
   data() {
     return {
       options: []
     }
   },
   mounted() {
-    const sleepTime = new Date()
-    for (let i = 6; i >= 1; i--) {
-      this.options.push(genOption(i, sleepTime))
+    let time = new Date()
+
+    // eslint-disable-next-line no-console
+    console.log('Time now is ' + time.getTime())
+
+    for (let i = 1; i <= 6; i++) {
+      const multiplier = i === 1 ? 104 : 90
+
+      const result = new Date(time.getTime() + multiplier * 60000)
+      time = result
+
+      this.options.push({
+        time: result,
+        class: this.getClassForCycle(i),
+        cycle: i
+      })
     }
   }
 }

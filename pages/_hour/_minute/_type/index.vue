@@ -1,9 +1,6 @@
 <template>
   <div class="suggestions">
-    <h1>
-      If you want to wake up at {{ wake | moment('h:mm A') }}, you should be
-      asleep at:
-    </h1>
+    <h1>If you want to wake up at {{ wake }}, you should be asleep at:</h1>
 
     <SleepRecommendationList :options="options" />
     <ReminderAndBack />
@@ -13,10 +10,12 @@
 <script>
 import SleepRecommendationList from '~/components/SleepRecommendationList'
 import ReminderAndBack from '~/components/ReminderAndBack'
-import genOption from '~/utils/generate-sleep-option'
+import CycleClassMixin from '~/mixin/cycle-class-mixin'
+import FormatDateMixin from '~/mixin/format-date-mixin'
 
 export default {
   components: { SleepRecommendationList, ReminderAndBack },
+  mixins: [CycleClassMixin, FormatDateMixin],
   data() {
     return {
       wake: null,
@@ -30,7 +29,7 @@ export default {
       /^(am|pm)$/i.test(params.type)
     )
   },
-  mounted() {
+  created() {
     const type = this.$route.params.type.toUpperCase()
     let hour = parseInt(this.$route.params.hour)
     const minute = parseInt(this.$route.params.minute)
@@ -39,14 +38,23 @@ export default {
       hour += 12
     }
 
-    const wakeTime = new Date()
-    wakeTime.setHours(hour)
-    wakeTime.setMinutes(minute)
+    let wake = new Date()
+    wake.setHours(hour)
+    wake.setMinutes(minute)
 
-    this.wake = wakeTime
+    this.wake = this.formatDate(wake)
 
-    for (let i = 6; i >= 3; i--) {
-      this.options.push(genOption(i, wakeTime))
+    for (let i = 3; i <= 6; i++) {
+      const multiplier = i === 3 ? 270 : 90
+
+      const result = new Date(wake.getTime() - multiplier * 60000)
+      wake = result
+
+      this.options.push({
+        time: result,
+        class: this.getClassForCycle(i),
+        cycle: i
+      })
     }
   }
 }

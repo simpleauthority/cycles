@@ -1,17 +1,20 @@
 <template>
   <b-row class="list">
     <b-col v-for="option in options" :key="option.cycles">
-      <p :class="'suggestion ' + option.clazz">
-        {{ option.time | moment('h:mm A') }} for {{ option.cycles }} sleep
-        {{ pluralizeCycles(option.cycles) }}
+      <p :class="'suggestion ' + option.class">
+        {{ formatDate(option.time) }} for {{ option.cycle }} sleep
+        {{ pluralizeCycles(option.cycle) }}
       </p>
     </b-col>
   </b-row>
 </template>
 
 <script>
+import FormatDateMixin from '~/mixin/format-date-mixin'
+
 export default {
   name: 'SleepRecommendationList',
+  mixins: [FormatDateMixin],
   props: {
     options: {
       type: Array,
