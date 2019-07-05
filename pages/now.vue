@@ -22,11 +22,8 @@ export default {
       options: []
     }
   },
-  mounted() {
+  created() {
     let time = new Date()
-
-    // eslint-disable-next-line no-console
-    console.log('Time now is ' + time.getTime())
 
     for (let i = 1; i <= 6; i++) {
       const multiplier = i === 1 ? 104 : 90
