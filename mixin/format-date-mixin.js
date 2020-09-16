@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 
 export default {
   methods: {
-    formatDate(date) {
+    formatDate (date) {
       return DateTime
         .fromJSDate(date)
         .setZone(Intl.DateTimeFormat().resolvedOptions().timeZone)

@@ -19,15 +19,14 @@ export default {
     options: {
       type: Array,
       required: true,
-      default: function () {
+      default () {
         return []
       }
     }
   },
   methods: {
-    pluralizeCycles(cycles) {
-      if (cycles === 1) return 'cycle'
-      else return 'cycles'
+    pluralizeCycles (cycles) {
+      if (cycles === 1) { return 'cycle' } else { return 'cycles' }
     }
   }
 }

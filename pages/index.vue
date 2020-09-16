@@ -67,7 +67,7 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       selectedHour: null,
       selectedMinute: null,
@@ -106,18 +106,18 @@ export default {
     }
   },
   methods: {
-    resetModal() {
+    resetModal () {
       this.selectedHour = null
       this.selectedMinute = null
     },
-    checkForm() {
+    checkForm () {
       return this.$refs.form.checkValidity()
     },
-    handleOk(evt) {
+    handleOk (evt) {
       evt.preventDefault()
       this.handleSubmit()
     },
-    handleSubmit() {
+    handleSubmit () {
       if (!this.checkForm()) {
         this.$bvModal.msgBoxOk(
           "Please make sure you've chosen an hour and a minute to wake up at."

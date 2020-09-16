@@ -16,20 +16,20 @@ import FormatDateMixin from '~/mixin/format-date-mixin'
 export default {
   components: { SleepRecommendationList, ReminderAndBack },
   mixins: [CycleClassMixin, FormatDateMixin],
-  data() {
+  data () {
     return {
       wake: null,
       options: []
     }
   },
-  validate({ params }) {
+  validate ({ params }) {
     return (
       /^0[1-9]|1[0-2]$/.test(params.hour) &&
       /^0[0-9]|[1-5][0-9]$/.test(params.minute) &&
       /^(am|pm)$/i.test(params.type)
     )
   },
-  created() {
+  created () {
     const type = this.$route.params.type.toUpperCase()
     let hour = parseInt(this.$route.params.hour)
     const minute = parseInt(this.$route.params.minute)

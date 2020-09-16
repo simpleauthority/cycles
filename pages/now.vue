@@ -17,12 +17,12 @@ import CycleClassMixin from '~/mixin/cycle-class-mixin'
 export default {
   components: { SleepRecommendationList, ReminderAndBack },
   mixins: [CycleClassMixin],
-  data() {
+  data () {
     return {
       options: []
     }
   },
-  created() {
+  created () {
     let time = new Date()
 
     for (let i = 1; i <= 6; i++) {
