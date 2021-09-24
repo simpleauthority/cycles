@@ -82,9 +82,13 @@ export default {
       const wakeMinutes = this.wakeTime.getMinutes() + (this.wakeTime.getHours() * 60)
       const sleepMinutes = this.actualSleepTime.getMinutes() + (this.actualSleepTime.getHours() * 60)
 
-      let wakingMinutes = sleepMinutes - wakeMinutes
-      if (wakingMinutes <= 0 || wakingMinutes - 14 === 0) {
-        wakingMinutes = 1440 + Math.abs(wakingMinutes) // awake for over 24 hours?!!!
+      let wakingMinutes = 0
+      if (wakeMinutes - sleepMinutes > 14) {
+        // awake less than 24 hours (14 is adjusted time to fall asleep)
+        wakingMinutes = wakeMinutes - sleepMinutes
+      } else {
+        // awake longer than 24 hours
+        wakingMinutes = 1440 + Math.abs(sleepMinutes - wakeMinutes)
       }
 
       return wakingMinutes
@@ -93,7 +97,12 @@ export default {
       return this.totalWakingMinutes / 60
     },
     totalSleepDurationMinutes () {
-      return Math.abs(1440 - this.totalWakingMinutes)
+      let wakingMinutes = this.totalWakingMinutes
+      if (wakingMinutes > 1440) {
+        wakingMinutes -= 1440
+      }
+
+      return Math.abs(1440 - wakingMinutes)
     },
     totalSleepDurationHours () {
       return this.totalSleepDurationMinutes / 60
