@@ -16,18 +16,18 @@ import FormatDateMixin from '~/mixin/format-date-mixin'
 export default {
   components: { SleepRecommendationList, ReminderAndBack },
   mixins: [CycleClassMixin, FormatDateMixin],
-  data () {
-    return {
-      wake: null,
-      options: []
-    }
-  },
   validate ({ params }) {
     return (
       /^0[1-9]|1[0-2]$/.test(params.hour) &&
       /^0[0-9]|[1-5][0-9]$/.test(params.minute) &&
       /^(am|pm)$/i.test(params.type)
     )
+  },
+  data () {
+    return {
+      wake: null,
+      options: []
+    }
   },
   created () {
     const type = this.$route.params.type.toUpperCase()
