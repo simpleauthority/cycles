@@ -13,7 +13,7 @@
 import FormatDateMixin from '~/mixin/format-date-mixin'
 
 export default {
-  name: 'SleepRecommendationList',
+  name: 'TimeRecommendationList',
   mixins: [FormatDateMixin],
   props: {
     options: {
