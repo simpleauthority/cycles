@@ -18,7 +18,7 @@
     "@nuxtjs/style-resources": "^1.2.1",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.21.2",
-    "luxon": "^2.0.2",
+    "luxon": "^2.5.2",
     "nuxt": "^2.15.8",
     "vue-luxon": "^0.10.0"
   },
